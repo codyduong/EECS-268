@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "duong-3050266-lab-02"
+version = "0.0.0"
+description = ""
+authors = ["Cody Duong <duongcody507@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+black = "^22.6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
