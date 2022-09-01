@@ -3,7 +3,7 @@ https://wiki.ittc.ku.edu/ittc_wiki/index.php/EECS268
 
 See disclaimer below, this repo will be made public when I am no longer a student at KU.
 
-Written for KU EECS 168 Spring 2022 taught by Professor John Gibbons.
+Written for KU EECS 268 Spring 2022 taught by Professor John Gibbons.
 
 ```
 ## Posting Solutions
