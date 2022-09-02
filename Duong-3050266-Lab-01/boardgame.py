@@ -8,6 +8,7 @@ Purpose: Contains classes to deal with boardgame properties
 """
 
 from typing import NoReturn, Tuple, TypeVar
+
 # from typing import Self
 # compatibility alias
 Self = TypeVar("Self", bound="Boardgame")
@@ -62,7 +63,7 @@ class Boardgame:
         return self._max_playtime
 
     def set_sort_filter(self: Self, filter: str) -> Self:
-        if (getattr(self, filter) is not None):
+        if getattr(self, filter) is not None:
             self._filter = filter
             return self
         else:
@@ -97,6 +98,7 @@ class BoardgameBuilder:
     """
     A builder class for Boardgames
     """
+
     def __init__() -> NoReturn:
         pass
 
@@ -105,7 +107,11 @@ class BoardgameBuilder:
     def __parse_row(r: str) -> T:
         p = r.split("\t")
         # The .tsv download is different from the format specified...
-        return Boardgame([str(p[0]), int(p[3]), float(p[1]), float(p[2]), int(p[4]), int(p[5])])
+        # 2.) Dr. Gibbons changed the input file given to match the format given on the lab wiki like the following.
+        # <name> <gibbons-rating> <people's rating> <year published> <min players> <max playtime> 
+        return Boardgame(
+            [str(p[0]), int(p[3]), float(p[1]), float(p[2]), int(p[4]), int(p[5])]
+        )
 
     @staticmethod
     def parse_raw_input(s: str) -> Tuple[Boardgame]:
