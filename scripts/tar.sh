@@ -1,4 +1,5 @@
-to_tar = $1
-
-rm -r "$1.tar.gz"
-tar -cvzf "$1.tar.gz" $1 --exclude="__pycache__"
+if [ -e "$1.tar.gz" ]
+then 
+  rm -r "$1.tar.gz"
+fi
+tar --exclude="__pycache__" -cvzf "$1.tar.gz" $1
