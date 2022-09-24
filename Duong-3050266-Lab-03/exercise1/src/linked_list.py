@@ -214,34 +214,46 @@ class LinkedList(Generic[T]):
         )
 
         curr_node = self._head
-        if is_int:
-            for _ in range(index):
-                if curr_node and curr_node.next:
-                    curr_node = curr_node.next
-                else:
-                    #  ...raises a RuntimeError otherwise.
-                    raise RuntimeError()
-            try:
+        try:
+            if is_int:
+                for _ in range(index):
+                    if curr_node and curr_node.next:
+                        curr_node = curr_node.next
                 return callback(curr_node)
-            except AttributeError as e:
-                #  ...raises a RuntimeError otherwise.
-                raise RuntimeError(e)
-        elif is_slice:
-            temp_list = LinkedList()
-            start = index.start or 0
-            stop = index.stop or len(self)
-            step = index.step or 1
-            assertx(start >= 0, ValueError, "Slicing with negative numbers is not supported")
-            assertx(stop >= 0, ValueError, "Slicing with negative numbers is not supported")
-            assertx(step >= 0, ValueError, "Slicing with negative numbers is not supported")
-            for i in range(stop):
-                if i >= start and (i + start) % step == 0:
-                    temp_list.append(curr_node.value)
-                if curr_node and curr_node.next:
-                    curr_node = curr_node.next
 
-            return callback(temp_list)
-        raise RuntimeError("Unknown error")
+            elif is_slice:
+                temp_list = LinkedList()
+                start = index.start or 0
+                stop = index.stop or len(self)
+                step = index.step or 1
+                assertx(
+                    start >= 0,
+                    ValueError,
+                    "Slicing with negative numbers is not supported",
+                )
+                assertx(
+                    stop >= 0,
+                    ValueError,
+                    "Slicing with negative numbers is not supported",
+                )
+                assertx(
+                    step >= 0,
+                    ValueError,
+                    "Slicing with negative numbers is not supported",
+                )
+                for i in range(stop):
+                    if i >= start and (i + start) % step == 0:
+                        temp_list.append(curr_node.value)
+                    if curr_node and curr_node.next:
+                        curr_node = curr_node.next
+
+                return callback(temp_list)
+        except AttributeError as e:
+            """
+            ...raises a RuntimeError otherwise. Ideally we'd cover this with the proper errors,
+            typically an IndexError, but it's explicitly stated otherwise on the lab reqs. w/e
+            """
+            raise RuntimeError(e)
 
     def __getitem__(self: Self, index: Union[int, slice]) -> T:
         """

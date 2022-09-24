@@ -1,0 +1,7 @@
+FORWARD
+FORWARD
+FORWARD
+FORWARD
+NAVIGATE http://google.com
+NAVIGATE http://ku.edu
+HISTORY

@@ -1,3 +1,11 @@
+"""
+Author: Cody Duong
+KUID: 3050266
+Date: 2022-09-23
+Lab: lab03
+Last modified: 2022-09-23
+Purpose: Test linked list functionality
+"""
 import unittest
 
 from exercise1.src.linked_list import LinkedList
@@ -64,7 +72,9 @@ class TestLinkedList(unittest.TestCase):
     def test_add(self):
         list1 = LinkedList(*range(10))
         list2 = LinkedList(*range(10))
-        self.assertListEqual([elem for elem in list1 + list2], [*range(10)] + [*range(10)])
+        self.assertListEqual(
+            [elem for elem in list1 + list2], [*range(10)] + [*range(10)]
+        )
 
     def test_conditional(self):
         list1 = LinkedList(*range(10))

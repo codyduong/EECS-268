@@ -1,0 +1,17 @@
+Invalid command 'FORWARD' with invalid arguments: ('http://google.com',)
+Ignoring and continuing...
+Invalid command 'HISTORY' with invalid arguments: ('BAD',)
+Ignoring and continuing...
+Invalid command 'BACK' with invalid arguments: ('BAD',)
+Ignoring and continuing...
+Oldest
+===========
+http://google.com
+http://reddit.com         <==current
+===========
+Newest
+
+Invalid command 'BACK' with invalid arguments: ('BAD',)
+Ignoring and continuing...
+Invalid command 'NOT_A_COMMAND'.
+Ignoring and continuing...

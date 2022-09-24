@@ -1,0 +1,14 @@
+FORWARD http://google.com
+FORWARD 
+FORWARD
+FORWARD
+NAVIGATE http://google.com
+NAVIGATE http://ku.edu
+HISTORY BAD
+BACK
+BACK BAD
+NAVIGATE http://reddit.com
+HISTORY
+BACK BAD
+BACK
+NOT_A_COMMAND

@@ -2,7 +2,7 @@
 Author: Cody Duong
 KUID: 3050266
 Date: 2022-08-31
-Lab: lab02
+Lab: lab03
 Last modified: 2022-09-22
 Purpose: Node
 """
