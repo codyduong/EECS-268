@@ -1,0 +1,1 @@
+Sequence generated in Rust equivalent of program, up to 495 since 496 is max recursion depth.
