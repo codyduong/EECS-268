@@ -9,7 +9,6 @@ Purpose: Test recursive power functionality
 
 
 from io import StringIO
-import json
 import unittest
 from unittest.mock import patch
 from exercise1.exercise1 import RecursivePower
@@ -33,6 +32,7 @@ class TestFibonacci(unittest.TestCase):
                 ["5", "96"],
                 "Answer: 12621774483536188886587657044524579674771302961744368076324462890625",
             ),
+            # it takes too long for this test to pass
             # (
             #     ["2", "455"],
             #     "Answer: 93035356709837681990313447409664580397266094167976711716030745495121828878514934185752454491361736391777602765602070775492429008462675968",
