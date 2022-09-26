@@ -14,7 +14,7 @@ from unittest.mock import patch
 from exercise1.exercise1 import RecursivePower
 
 
-class TestFibonacci(unittest.TestCase):
+class TestPower(unittest.TestCase):
     def __init__(self, *argv):
         super().__init__(*argv)
         self.tests = [
