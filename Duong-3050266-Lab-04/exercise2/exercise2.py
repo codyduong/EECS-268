@@ -24,7 +24,7 @@ def get_sick_number(day_num: int) -> int:
     if not isinstance(day_num, int):
         raise TypeError(f"Invalid day type, expected: int, received: {type(day_num)}")
     if day_num <= 0:
-        raise ValueError(f"Invalid day number, expected >= 0, received: {day_num}")
+        raise ValueError(f"Invalid day number, expected > 0, received: {day_num}")
     if day_num == 1:
         return 6
     elif day_num == 2:
@@ -43,6 +43,9 @@ if __name__ == "__main__":
     day_num: int = int(
         input("OUTBREAK!\nWhat day do you want a sick count for?: ").strip()
     )
-    infected: int = get_sick_number(day_num)
+    try:
+        infected: int = get_sick_number(day_num)
+        print(f"Total people with flu: {infected}")
+    except Exception as e:
+        print(e)
     # print([get_sick_number(d) for d in range(1, day_num)])
-    print(f"Total people with flu: {infected}")
