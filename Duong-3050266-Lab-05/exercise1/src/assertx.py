@@ -14,7 +14,7 @@ def assertx(
     predicate: Union[Callable[[], bool], bool], e: Exception, msg: str = Exception
 ) -> Union[None, NoReturn]:
     """
-    Assert extension, checks a predicate or boolean value, and runs the error if true
+    Assert extension, checks a predicate or boolean value, and runs the error if false
     
     :param predicate: A boolean or predicate function which will assert truthiness
     :param e: Exception to raise if predicate is false
