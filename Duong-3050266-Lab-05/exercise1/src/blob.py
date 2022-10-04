@@ -15,22 +15,21 @@ from typing import (
     Tuple,
     TypedDict,
     Union,
+    TypeGuard,
 )
 from exercise1.src.assertx import assertx
-from exercise1.src.typingx import Self
+from exercise1.src.typingx import Self  # pyright: ignore
 
 
 class Directions(Enum):
     """
     A directionallity enum, assuming the top-left is [0,0]
-
-    Index order is [column][row]
     """
 
-    UP = [-1, 0]
-    RIGHT = [0, 1]
-    DOWN = [1, 0]
-    LEFT = [0, -1]
+    LEFT = [-1, 0]
+    UP = [0, 1]
+    RIGHT = [1, 0]
+    DOWN = [0, -1]
 
 
 DIRECTION_OPPOSITE_MAP = {
@@ -42,7 +41,13 @@ DIRECTION_OPPOSITE_MAP = {
 
 
 class Blob:
+    """
+    Blob class used to simulate blob spread
+    """
+
     class ProcessedInput(TypedDict):
+        """Util type: https://peps.python.org/pep-0589/"""
+
         map_state: List[List[int]]
         blob_location: Tuple[int, int]
 
@@ -51,11 +56,18 @@ class Blob:
         map_state: List[List[int]],
         blob_location: Tuple[int, int],
         debug: bool = False,
-    ) -> Self:
+    ) -> None:
         """
         Initialize the blob with a map_state and blob_location
+
+        :param map_state: The map state either input manually or processed with Blob.prompt_file()
+        :param blob_location: The blob starting location input manually or processed with Blob.prompt_file()
+        :param debug: Enable debug for Blob, will print out every state change on run()
+
+        :example:
+            blob = Blob(**Blob.prompt_file)
         """
-        self.map_state: List[List[int]] = map_state
+        self.map_state: List[List[str]] = map_state
 
         blob_row, blob_col = blob_location
 
@@ -66,13 +78,13 @@ class Blob:
             ValueError,
             f"The blob must be spawned within a valid point either in a street, or on a person,\nreceived col: {blob_col}, row: {blob_row}, {map_state[blob_col][blob_row]}",
         )
-        self.map_state[blob_row][blob_col] = "B"
+        self.map_state[blob_row][blob_col] = "B"  # pyright: ignore
         self.blob_starting_pos = blob_location
         self.people_eaten: int = 1 if blob_spawn_value == "P" else 0
         self.sewers: List[Tuple[int, int]] = self._find_sewers()
         self.debug = debug
 
-    def run(self: Self, debug: bool = False) -> None:
+    def run(self: Self) -> None:
         """
         Run the blob spreading program
         """
@@ -92,7 +104,7 @@ class Blob:
             blob_location = self.blob_starting_pos
 
         for d in Directions:
-            blob_row, blob_col = blob_location
+            blob_row, blob_col = blob_location  # pyright: ignore
             col, row = blob_col + d.value[0], blob_row + d.value[1]
             printable_map = self.state_to_str()
             try:
@@ -111,17 +123,21 @@ class Blob:
                     continue
                 if self.map_state[row][col] == "P":
                     self.map_state[row][col] = "B"
+                    self.people_eaten += 1
                     if self.debug:
                         print(printable_map)
                     self._spread((row, col))
-                    self.people_eaten += 1
                     continue
                 if self.map_state[row][col] == "@":
-                    every_other_sewer = self.sewers
-                    every_other_sewer.remove((row, col))
-                    # start blob spread at every other sewer
-                    for sewer in every_other_sewer:
-                        self._spread(sewer)
+                    # remove the sewer from sewers to spread to
+                    if (row, col) in self.sewers:
+                        self.sewers.remove((row, col))
+                        # start blob spread at every other sewer
+                        for sewer in self.sewers:
+                            self._spread(sewer)
+                    else:
+                        # do nothing if the sewer is already spread from to prevent infinite sewer loop
+                        continue
             except IndexError:
                 pass
 
@@ -152,18 +168,23 @@ class Blob:
         of the blob class. Exceptions should be handled externally.
 
         :return: dict of {"map_state": map_state, "blob_location": blob_location}
+
         :example:
           blob = Blob(**Blob.prompt_file())
         """
-        file_name = input("Enter the name of the input file (tests/mocks/input1.txt): ")
+        file_name = input(
+            "Enter the name of the input file (exercise1/tests/mocks/input1.txt): "
+        )
         if file_name == "":
-            file_name = "tests/mocks/input1.txt"
+            file_name = "exercise1/tests/mocks/input1.txt"
         while not os.path.isfile(file_name):
-            file_name = input(
-                "File was not found, please try again (tests/mocks/input1.txt): "
-            )
-            if file_name == "":
-                file_name = "tests/mocks/input1.txt"
+            """The lab reqs state the program simply fail, so I will do so instead..."""
+            raise ValueError("Invalid file")
+            # file_name = input(
+            #     "File was not found, please try again (tests/mocks/input1.txt): "
+            # )
+            # if file_name == "":
+            #     file_name = "tests/mocks/input1.txt"
         with open(file_name, encoding="utf-8") as f:
             all_lines = f.readlines()
             metadata = all_lines[:2:]
@@ -189,7 +210,7 @@ class Blob:
                 for col_index, value in enumerate(row.strip()):
                     # print(row_index, col_index)
                     try:
-                        map_state[row_index][col_index] = value
+                        map_state[row_index][col_index] = value  # pyright: ignore
                     except IndexError:
                         raise IndexError(
                             f"Metadata mismatch, tried to set value at col: {col_index}, row: {row_index},\nbut is out of specified bounds, max allowable row: {rows-1}, max allowable col: {cols-1}"

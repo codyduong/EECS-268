@@ -6,4 +6,4 @@ def text_str(s: str) -> str:
 
 
 def str_to_matrix(s: str) -> List[List[int]]:
-    return [[*i] for i in s.split("\n")]
+    return [[*i] for i in s.split("\n")]  # pyright: ignore

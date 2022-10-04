@@ -7,15 +7,17 @@ Last modified: 2022-09-22
 Purpose: Assert extension, send out other error types (rather than just AssertionError)
 """
 
-from typing import Callable, NoReturn, Union
+from typing import Any, Callable, NoReturn, Union
 
 
 def assertx(
-    predicate: Union[Callable[[], bool], bool], e: Exception, msg: str = Exception
+    predicate: Union[Callable[[], bool], bool],
+    e: Callable[[str], Any],
+    msg: str = "",
 ) -> Union[None, NoReturn]:
     """
     Assert extension, checks a predicate or boolean value, and runs the error if false
-    
+
     :param predicate: A boolean or predicate function which will assert truthiness
     :param e: Exception to raise if predicate is false
     :param msg: Message to send on failure

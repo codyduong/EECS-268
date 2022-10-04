@@ -12,6 +12,10 @@ black = "^22.8.0"
 coverage = "^6.4.4"
 docutils = "^0.19"
 esbonio = "^0.14.1"
+pyright = "^1.1.273"
+
+[tool.pyright]
+strictListInference = "true"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

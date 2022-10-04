@@ -11,11 +11,11 @@ Self = None
 TypeGuard = None
 
 try:
-    from typing import Self
+    from typing import Self  # pyright: ignore
 except ImportError:
     pass
 
 try:
-    from typing import TypeGuard
+    from typing import TypeGuard  # pyright: ignore
 except ImportError:
     pass

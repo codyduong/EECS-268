@@ -12,7 +12,7 @@ class TestBlobRun(unittest.TestCase):
         super().__init__(*argv)
 
         self.tests = [
-            (text_str(f"input{i}"), text_str(f"output{i}")) for i in range(2, 3)
+            (text_str(f"input{i}"), text_str(f"output{i}")) for i in range(1, 5)
         ]
 
     def test_run(self):
@@ -24,3 +24,12 @@ class TestBlobRun(unittest.TestCase):
                     blob.run()
                     with open(output) as f:
                         self.assertEqual(f.read(), mock_print.getvalue().strip())
+
+    def test_run_steps(self):
+        with patch("builtins.input", return_value=text_str("steps_input1")):
+            blob = Blob(**Blob.prompt_file(), debug=True)
+            # blob.run()
+            with patch("sys.stdout", new=StringIO()) as mock_print:
+                blob.run()
+                with open(text_str("steps_output1")) as f:
+                    self.assertEqual(f.read(), mock_print.getvalue().strip())
