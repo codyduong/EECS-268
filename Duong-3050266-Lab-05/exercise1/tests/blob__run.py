@@ -1,7 +1,7 @@
 from io import StringIO
 import unittest
 from unittest.mock import patch
-from exercise1.tests.testutil import text_str, str_to_matrix
+from exercise1.tests.testutil import text_str
 from exercise1.src.blob import Blob
 
 

@@ -9,13 +9,11 @@ Purpose: blob spreading thing
 
 from enum import Enum
 import os
-from re import L
 from typing import (
     List,
     Tuple,
     TypedDict,
     Union,
-    TypeGuard,
 )
 from exercise1.src.assertx import assertx
 from exercise1.src.typingx import Self  # pyright: ignore
@@ -48,12 +46,12 @@ class Blob:
     class ProcessedInput(TypedDict):
         """Util type: https://peps.python.org/pep-0589/"""
 
-        map_state: List[List[int]]
+        map_state: List[List[str]]
         blob_location: Tuple[int, int]
 
     def __init__(
         self: Self,
-        map_state: List[List[int]],
+        map_state: List[List[str]],
         blob_location: Tuple[int, int],
         debug: bool = False,
     ) -> None:
