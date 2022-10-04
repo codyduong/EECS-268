@@ -12,7 +12,7 @@ class TestBlobRun(unittest.TestCase):
         super().__init__(*argv)
 
         self.tests = [
-            (text_str(f"input{i}"), text_str(f"output{i}")) for i in range(1, 5)
+            (text_str(f"input{i}"), text_str(f"output{i}")) for i in range(1, 6)
         ]
 
     def test_run(self):

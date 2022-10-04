@@ -1,0 +1,6 @@
+BBBBBBBBBB
+#########B
+BBBBBBBBBB
+B#########
+BBBBBBBBBB
+Total eaten: 1

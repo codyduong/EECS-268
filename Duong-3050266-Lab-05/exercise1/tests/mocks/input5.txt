@@ -1,0 +1,7 @@
+5 10
+0 0
+SSSSSSSSSS
+#########S
+SSSSSSSSSS
+S#########
+SSSSSSSSSP
