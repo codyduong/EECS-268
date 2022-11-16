@@ -1,0 +1,40 @@
+ARRIVE C.S. Student1 19 coffee_overdose 1
+ARRIVE C.S. Student2 19 coffee_overdose 2
+ARRIVE C.S. Student3 19 coffee_overdose 3
+ARRIVE C.S. Student4 19 coffee_overdose 4
+ARRIVE C.S. Student5 19 coffee_overdose 5
+ARRIVE C.S. Student6 19 coffee_overdose 6
+ARRIVE C.S. Student7 19 coffee_overdose 7
+ARRIVE C.S. Student8 19 coffee_overdose 8
+ARRIVE C.S. Student9 19 coffee_overdose 9
+ARRIVE C.S. Student10 19 coffee_overdose 10
+ARRIVE C.S. Student11 19 coffee_overdose 10
+ARRIVE C.S. Student12 19 coffee_overdose 8
+ARRIVE C.S. Student13 19 coffee_overdose 8
+NEXT
+TREAT
+NEXT
+TREAT
+NEXT
+TREAT
+NEXT
+TREAT
+NEXT
+TREAT
+NEXT
+TREAT
+NEXT
+TREAT
+NEXT
+TREAT
+NEXT
+TREAT
+NEXT
+TREAT
+NEXT
+TREAT
+NEXT
+TREAT
+NEXT
+TREAT
+COUNT

@@ -1,0 +1,12 @@
+FOOBAR JOHN GIBBONS
+FUBAR
+BAZ
+arrive John Gibbons 39 sleep_deprivation 2
+ARRIVE C.S. Student 19 coffee_overdose 6
+ARRIVE Grigori Rasputin 47 everything 9
+count
+NEXT
+TREAT
+NEXT
+TREAT
+COUNT

@@ -15,10 +15,16 @@ T = TypeVar("T", bound=Comparable)
 
 
 class MaxHeap(Generic[T]):
-    def __init__(self, *values: T) -> None:
+    """Maxheap implementation"""
+
+    def __init__(self, *values: T | list[T]) -> None:
         self._list: list[T] = []
         for value in values:
-            self.insert(value)
+            if isinstance(value, list):
+                for v in value:  # type: ignore
+                    self.insert(v)  # type: ignore
+            else:
+                self.insert(value)
 
     @property
     def heap(self) -> list[T]:
@@ -68,16 +74,15 @@ class MaxHeap(Generic[T]):
         :param i: location of out-of-order value
         :return None:
         """
-        parent: int = (i - 1) / 2
+        parent: int = (i - 1) // 2
 
         heap = self._list
 
-        print(heap[i], heap[parent])
-        if heap[i] > heap[parent]:
-            heap[i], heap[parent] = heap[parent], heap[i]
-            self._iheapify(parent)
-
-        # self._dheapify(0)
+        # print(heap, i, parent)
+        if parent >= 0:
+            if heap[i] > heap[parent]:
+                heap[i], heap[parent] = heap[parent], heap[i]
+                self._iheapify(parent)
 
     def insert(self, value: T) -> None:
         """
@@ -87,7 +92,7 @@ class MaxHeap(Generic[T]):
         :return None:
         """
         self._list.append(value)
-        print(value)
+        # print("insert", value)
         self._iheapify(len(self._list) - 1)
 
     def _dheapify(self, i: int) -> None:
@@ -100,8 +105,8 @@ class MaxHeap(Generic[T]):
         :return None:
         """
         largest: int = i
-        left: int = i * 2 + 1
-        right: int = i * 2 + 2
+        left: int = MaxHeap.left(i)
+        right: int = MaxHeap.right(i)
 
         if left < len(self._list) and self._list[largest] < self._list[left]:
             largest = left
@@ -115,9 +120,9 @@ class MaxHeap(Generic[T]):
 
             self._dheapify(largest)
 
-    def remove(self) -> T | None:
+    def pop(self) -> T | None:
         """
-        Remove the root of the heap
+        Pop the root of the heap
 
         :return T | None: Returns the value of the popped root if successful, None if there is none
         """
@@ -125,3 +130,10 @@ class MaxHeap(Generic[T]):
         popped_root: T | None = self._list.pop() if len(self._list) > 0 else None
         self._dheapify(0)
         return popped_root
+
+    def __len__(self) -> int:
+        return len(self._list)
+
+    def peek(self) -> T | None:
+        """Returns the top of the heap without removing it"""
+        return self._list[0]
