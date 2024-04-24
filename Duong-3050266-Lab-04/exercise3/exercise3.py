@@ -1,11 +1,3 @@
-"""
-Author: Cody Duong
-KUID: 3050266
-Date: 2022-09-25
-Lab: lab04
-Last modified: 2022-09-25
-Purpose: Fibonacci
-"""
 import functools
 from typing import TypeVar
 

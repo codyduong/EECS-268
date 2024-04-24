@@ -1,48 +1,33 @@
-
-"""
-Author: Cody Duong
-KUID: 3050266
-Date: 2022-08-31
-Lab: lab02
-Last modified: 2022-08-31
-Purpose: Handles executive functions of lab2
-"""
-
-
 from .stack import Stack
-from typing import TypeVar
 from .node import Node
-Self = TypeVar("Self", bound="Process")
-
 
 class Process:
-    _callstack: Stack = None
+    _callstack = None
 
-    def __init__(self: Self, s: str) -> Self:
+    def __init__(self, s):
         """ Takes in a process name, ie. itunes"""
         self._processname = s
         self._callstack = Stack(Node("main"))
     
     @property
-    def processname(self: Self) -> str:
+    def processname(self):
         return self._processname
 
     @property
-    def callstack(self: Self) -> Stack:
+    def callstack(self):
         return self._callstack
 
-    def add(self: Self, s: str) -> None:
+    def add(self, s):
         self._callstack.push(s)
 
-    def empty_check(self: Self) -> None:
-        if (self._callstack.is_empty()):
+    def empty_check(self):
+        if self._callstack.is_empty():
             print(f"{self.processname} process has ended")
         
-
-    def call(self: Self) -> None:
+    def call(self):
         print(f"{self.processname} calls {self._callstack.pop()}")
         self.empty_check()
         
-    def returns(self: Self) -> None:
+    def returns(self):
         print(f"{self.processname} returns from {self._callstack.pop()}")
         self.empty_check()

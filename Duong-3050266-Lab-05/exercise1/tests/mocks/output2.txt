@@ -1,9 +1,0 @@
-BBBBBBB#
-######B#
-@BBBBBB#
-########
-###B####
-@BBB#SS#
-#B####S#
-###PPPSP
-Total eaten: 2

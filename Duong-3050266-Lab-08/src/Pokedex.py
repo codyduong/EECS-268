@@ -1,39 +1,22 @@
-"""
-Author: Cody Duong
-KUID: 3050266
-Date: 2022-10-30
-Lab: lab07
-Last modified: 2022-10-30
-Purpose: Pokedex
-"""
-
-
 import os
-from typing import Any, Literal, TypeVar, Union
-
-from src.BinarySearchTreeNode import BinarySearchTreeNode
-from src.BinarySearchTree import BinarySearchTree
+from src.BinarySearchTree import BinarySearchTree, BinarySearchTreeNode
 from src.Pokemon import Pokemon
 
-
-Pokedex = TypeVar("Pokedex", bound="Pokedex")
-
-
-class Pokedex(BinarySearchTree[Pokemon]):
+class Pokedex(BinarySearchTree):
     def __init__(
-        self, pokedex: Union[BinarySearchTreeNode[Pokemon], None] = None
+        self, pokedex = None
     ) -> None:
         super().__init__()
 
         self._root_node = pokedex or Pokedex.prompt_pokedex()
 
     @staticmethod
-    def prompt_pokedex() -> BinarySearchTreeNode[Pokemon]:
+    def prompt_pokedex():
         """
         Reads the input file
         """
 
-        file_name: str = input("Enter the name of the pokedex file (pokedex.txt): ")
+        file_name = input("Enter the name of the pokedex file (pokedex.txt): ")
         if file_name == "":
             file_name = "pokedex.txt"
         while not os.path.isfile(file_name):
@@ -42,20 +25,20 @@ class Pokedex(BinarySearchTree[Pokemon]):
             if file_name == "":
                 file_name = "pokedex.txt"
 
-        pokedex: BinarySearchTree[Pokemon] = BinarySearchTree()
+        pokedex = BinarySearchTree()
         with open(file_name, encoding="utf-8") as f:
             for line in f.readlines():
                 name_EN, i, name_JP = line.strip().split("\t")
                 pokedex.add(Pokemon(i, name_EN, name_JP))
 
-        return pokedex._root_node  # type: ignore
+        return pokedex._root_node  
 
     def search(
         self,
-        value: int,
+        value,
         *_,
-        current_node: Union[BinarySearchTreeNode[Pokemon], None, Literal[False]] = None
-    ) -> Union[BinarySearchTreeNode[Pokemon], None]:
+        current_node = None
+    ):
         """
         Overload the base binary tree function
         """
@@ -63,10 +46,10 @@ class Pokedex(BinarySearchTree[Pokemon]):
 
     def remove(
         self,
-        value: int,
+        value,
         *_,
-        current_node: Union[BinarySearchTreeNode[Pokemon], None, Literal[False]] = None
-    ) -> Union[BinarySearchTreeNode[Pokemon], None]:
+        current_node = None
+    ):
         """
         Overload the base binary tree function
         """
@@ -74,5 +57,5 @@ class Pokedex(BinarySearchTree[Pokemon]):
 
     def copy(
         self,
-    ) -> Any:
-        return Pokedex(super()._copy())
+    ):
+        return Pokedex(super().copy()._root_node)

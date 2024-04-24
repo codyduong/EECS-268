@@ -1,42 +1,30 @@
-"""
-Author: Cody Duong
-KUID: 3050266
-Date: 2022-08-31
-Lab: lab02
-Last modified: 2022-08-31
-Purpose: Stack
-"""
-
-from typing import TypeVar
 from .node import Node
-Self = TypeVar("Self", bound="Stack")
 
 class Stack():
-  T = TypeVar("T")
-  current_node: Node = None
+  current_node = None
 
-  def __init__(self: Self, entry: T = None) -> Self:
+  def __init__(self, entry=None):
     self.current_node = entry
 
-  def push(self: Self, entry: T) -> None:
+  def push(self, entry):
     old_node = self.current_node
     new_node = Node(entry)
     new_node.link_next(old_node)
     self.current_node = new_node
       
-  def pop(self: Self) -> T:
+  def pop(self):
     temp_current_node = self.current_node
-    if (temp_current_node is not None):
+    if temp_current_node is not None:
       self.current_node = temp_current_node.next
       return temp_current_node.curr
     else:
       return RuntimeError("Could not pop")
 
-  def peek_front(self: Self) -> T:
-    if (self.current_node is not None):
+  def peek(self):
+    if self.current_node is not None:
       return self.current_node.curr
     else:
       return RuntimeError("Could not peek at stack")
 
-  def is_empty(self: Self) -> bool:
+  def is_empty(self):
     return self.current_node is None

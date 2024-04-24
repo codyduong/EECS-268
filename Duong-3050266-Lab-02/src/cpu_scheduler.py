@@ -1,27 +1,13 @@
-
-"""
-Author: Cody Duong
-KUID: 3050266
-Date: 2022-08-31
-Lab: lab02
-Last modified: 2022-08-31
-Purpose: Schedules processes
-"""
-
-
-from typing import TypeVar
 from .process import Process
 from .linkedqueue import LinkedQueue
-Self = TypeVar("Self", bound="CPUScheduler")
-
 
 class CPUScheduler:
-    _linkedqueue: LinkedQueue = None
+    _linkedqueue = None
 
-    def __init__(self: Self) -> Self:
+    def __init__(self):
         self._linkedqueue = LinkedQueue()
 
-    def run(self: Self, s: str) -> None:
+    def run(self, s):
         print('')
         for row in s.split('\n'):
             command_tuple = row.split(' ')
@@ -39,4 +25,4 @@ class CPUScheduler:
             else:
                 print("Invalid Command")
 
-        print("\nCPU has no more processes/functions scheduled")
+        print('')

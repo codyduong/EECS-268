@@ -1,56 +1,45 @@
-"""
-Author: Cody Duong
-KUID: 3050266
-Date: 2022-08-31
-Lab: lab02
-Last modified: 2022-08-31
-Purpose: Linked Queue
-"""
-
-from typing import TypeVar
 from .node import Node
-Self = TypeVar("Self", bound="LinkedQueue")
 
+# queue is already used
 class LinkedQueue:
-  T = TypeVar("T")
-  _current_node: Node = None
+  _current_node = None
 
-  def __init__(self: Self) -> Self:
+  def __init__(self):
     pass
 
   @property
-  def current_node(self: Self) -> Node:
+  def current_node(self):
     return self._current_node
 
   @current_node.setter
-  def curret_node(self: Self, n: Node) -> None:
+  def current_node(self, n):
     self._current_node = n
 
-  def enqueue(self: Self, entry: T) -> None:
-    next_node: Node = self.current_node
-    if (self.curret_node is not None):
+  def enqueue(self, entry):
+    next_node = self.current_node
+    if self.current_node is not None:
       while True:
-        if (next_node is not None and next_node.next is not None):
+        if next_node is not None and next_node.next is not None:
           next_node = next_node.next
         else:
           next_node.link_next(Node(entry))
           break
     else:
-      self.curret_node = Node(entry)
+      self.current_node = Node(entry)
       
-  def dequeue(self: Self) -> T:
+  def dequeue(self):
     temp_current_node = self.current_node
-    if (temp_current_node is not None):
+    if temp_current_node is not None:
       self._current_node = temp_current_node.next
       return temp_current_node.curr
     else:
       return RuntimeError("Could not dequeue")
 
-  def peek_front(self: Self) -> T:
-    if (self.current_node is not None):
+  def peek_front(self):
+    if self.current_node is not None:
       return self.current_node.curr
     else:
       return RuntimeError("Could not peek at queue")
 
-  def is_empty(self: Self) -> bool:
+  def is_empty(self):
     return self.current_node is None

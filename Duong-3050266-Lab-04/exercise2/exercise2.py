@@ -1,19 +1,9 @@
-"""
-Author: Cody Duong
-KUID: 3050266
-Date: 2022-02-09
-Lab: lab04
-Last modified: 2022-09-25
-Purpose: "Outbreak!"
-
-This is a modified version of the original lab in 168, which I already used a recursive function for.
-"""
 
 import functools
 
 
 @functools.cache
-def get_sick_number(day_num: int) -> int:
+def get_sick_number(day_num):
     """
     Get the number of sick people on a day
 
@@ -40,11 +30,11 @@ def get_sick_number(day_num: int) -> int:
 
 
 if __name__ == "__main__":
-    day_num: int = int(
+    day_num = int(
         input("OUTBREAK!\nWhat day do you want a sick count for?: ").strip()
     )
     try:
-        infected: int = get_sick_number(day_num)
+        infected = get_sick_number(day_num)
         print(f"Total people with flu: {infected}")
     except Exception as e:
         print(e)

@@ -1,26 +1,9 @@
-"""
-Author: Cody Duong
-KUID: 3050266
-Date: 2022-08-31
-Lab: lab03
-Last modified: 2022-09-22
-Purpose: Node
-"""
-
-from typing import Any, Generic, TypeVar
-from .typingx import Self, TypeGuard
-
-Self = TypeVar("Self", bound="Node")
-
-T = TypeVar("T")
-
-
-class Node(Generic[T]):
+class Node:
     """
     This node implementation with the ability to link and unlink previous/next nodes
     """
 
-    def __init__(self: Self, value: T, prev: Self = None, next: Self = None) -> Self:
+    def __init__(self, value, prev=None, next=None):
         """
         :param value: The value of the node
         :param prev: Optional. Set the previous node
@@ -31,22 +14,22 @@ class Node(Generic[T]):
         self.link_next(next)
 
     @property
-    def value(self: Self) -> T:
+    def value(self):
         return self._value
 
     @property
-    def prev(self: Self) -> Self:
+    def prev(self):
         return self._prev
 
     @property
-    def next(self: Self) -> Self:
+    def next(self):
         return self._next
 
     @value.setter
-    def value(self: Self, value: T) -> T:
+    def value(self, value):
         self._value = value
 
-    def link_prev(self: Self, prev_node: Self) -> None:
+    def link_prev(self, prev_node):
         """
         Links the previous pointer towards another Node, and also sets that Node's forwards pointer to this Node
 
@@ -56,7 +39,7 @@ class Node(Generic[T]):
         if prev_node and prev_node.next is None:
             prev_node.link_next(self)
 
-    def link_next(self: Self, next_node: Self) -> None:
+    def link_next(self, next_node):
         """
         Links the forwards pointer towards another Node, and also sets that Node's previous pointer to this Node
 
@@ -66,7 +49,7 @@ class Node(Generic[T]):
         if next_node and next_node.prev is None:
             next_node.link_prev(self)
 
-    def unlink_prev(self: Self) -> None:
+    def unlink_prev(self):
         """
         Unlinks the forwards pointer towards another Node, and also sets that Node's previous pointer to this None
 
@@ -76,7 +59,7 @@ class Node(Generic[T]):
             self._prev.unlink_next()
         self._prev = None
 
-    def unlink_next(self: Self) -> None:
+    def unlink_next(self):
         """
         Unlinks the previous pointer towards another Node, and also sets that Node's forwards pointer to this None
 
@@ -86,10 +69,10 @@ class Node(Generic[T]):
             self._next.unlink_prev()
         self._next = None
 
-    def __str__(self: Self) -> str:
+    def __str__(self):
         return str(self._value)
 
     @staticmethod
-    def isinstance(arg: Any) -> "TypeGuard[Node[T]]":
+    def isinstance(arg):
         """Typeguards if it is an own instance, see PEP-0647"""
         return isinstance(arg, Node)

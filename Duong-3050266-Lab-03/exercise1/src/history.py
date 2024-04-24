@@ -1,37 +1,20 @@
-"""
-Author: Cody Duong
-KUID: 3050266
-Date: 2022-03-07
-Lab: lab05
-Last modified: 2022-09-23
-Purpose: Lists and strings web navigator.
-
-This is code adapated originally written for the EECS168 equivalent.
-"""
-
 import os.path
 import sys
-from typing import TypeVar
 from .linked_list import LinkedList
-from .typingx import Self
-
-Self = TypeVar("Self", bound="History")
-
 
 class History:
-    def __init__(self: Self):
+    def __init__(self):
         self._buffer = LinkedList()
         # init at -1, as default failcase
         self.index = 0
         self.COMMANDS = {
-            "NAVIGATE": self.navigate,
+            "NAVIGATE": self.navigate_to,
             "BACK": self.back,
             "FORWARD": self.forward,
             "HISTORY": self.history,
-            "EXIT": self.__exit,
         }
 
-    def navigate(self: Self, url: str = None) -> None:
+    def navigate_to(self, url=None):
         """
         Navigate to a url
 
@@ -41,33 +24,25 @@ class History:
             print("A url is a required parameter for NAVIGATE")
             return
         if self.index != len(self._buffer):
-            self._buffer = self._buffer[: self.index + 1] + LinkedList(url)
+            self._buffer = self._buffer[:self.index + 1] + LinkedList(url)
         else:
             self._buffer.append(url)
         self.forward()
 
-    def back(self: Self) -> None:
+    def back(self):
         """
         Goes back in history
         """
         self.index -= 1 if self.index > 0 and len(self._buffer) > 1 else 0
 
-    def forward(self: Self) -> None:
+    def forward(self):
         """
         Goes forward in history
         """
         history_len = len(self._buffer) - 1  # 0 indiced
         self.index += 1 if history_len > self.index and self.index != history_len else 0
 
-    def __exit(self: Self) -> None:
-        """
-        Exits the program
-        .. deprecated:: 1.0.0
-            Not a requirement in this lab
-        """
-        sys.exit(0)
-
-    def history(self) -> None:
+    def history(self):
         """
         Displays the current history
         """
@@ -75,7 +50,7 @@ class History:
             iter(
                 LinkedList(
                     *iter(
-                        f'{f"{url}":<24}{"  <==current" if index == self.index else ""}'.rstrip()
+                        f'{f"{url}":<20}{"<==current" if index == self.index else ""}'.rstrip()
                         for index, url in enumerate(self._buffer)
                     )
                 )
@@ -90,7 +65,7 @@ Newest
 """
         )
 
-    def input_command(self: Self, command: str, *argv) -> None:
+    def input_command(self, command, *argv):
         """
         Input a command
 
@@ -110,7 +85,7 @@ Newest
                     f"Invalid command '{command_upper}' with invalid arguments: {argv}\nIgnoring and continuing..."
                 )
 
-    def prompt_file_input(self: Self) -> None:
+    def prompt_file_input(self):
         """Prompt the user for a file to read history from"""
 
         file_name = input("Enter the name of the input file (exercise1_input.txt): ")
