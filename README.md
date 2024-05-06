@@ -2,12 +2,6 @@
 
 Taken with [Dr. John Gibbons](https://eecs.ku.edu/people/john-gibbons) in Spring 2022
 
-Lab instructions are found at https://wiki.ittc.ku.edu/ittc_wiki/index.php?title=EECS268:Labs, note that this page is regularly updated and
-requirements change by semester. 
-
-> [!NOTE]
-> See below in the grades table, only some of the ASSIGNMENT instructions have been preserved. The others are lost to time ☹️
-
 ## Grades
 
 > [!CAUTION]
@@ -19,6 +13,8 @@ requirements change by semester.
 >
 > **Lab 09** - Stability -3 Program crashes if NEXT or TREAT happens when there are no patients in the heap
 
+> [!NOTE]
+> Only some of the ASSIGNMENT instructions/rubrics have been preserved. The others are lost to time ☹️
 
 | Lab                                            | Grade |
 | ---------------------------------------------- | ----- |
