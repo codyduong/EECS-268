@@ -5,7 +5,7 @@ Taken with [Dr. John Gibbons](https://eecs.ku.edu/people/john-gibbons) in Spring
 Lab instructions are found at https://wiki.ittc.ku.edu/ittc_wiki/index.php?title=EECS268:Labs, note that this page is regularly updated and
 requirements change by semester. 
 
-> [!INFO]
+> [!NOTE]
 > See below in the grades table, only some of the ASSIGNMENT instructions have been preserved. The others are lost to time ☹️
 
 ## Grades
